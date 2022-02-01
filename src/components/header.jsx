@@ -32,30 +32,33 @@ export default function Header(props) {
               </a>
             </li>
           </ul>
-          {props.searchBar?<form className="d-flex">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>:""}
+          {props.searchBar ? (
+            <form className="d-flex">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button className="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </nav>
   );
 }
 
-Header.propTypes={
+Header.propTypes = {
   title: propTypes.string,
-  searchBar: propTypes.bool.isRequired
-}
+  searchBar: propTypes.bool.isRequired,
+};
 
-Header.defaultProps={
+Header.defaultProps = {
   title: "My Todos List",
-  searchBar:true
-}
-
+  searchBar: true,
+};
