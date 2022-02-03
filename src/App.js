@@ -4,6 +4,12 @@ import Footerr from "./components/footer";
 import Todos from "./components/todos";
 import { useState, useEffect } from 'react';
 import Addtodo from "./components/addtodo"
+import About from "./components/about"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import './css/App.css'
 
 function App() {
@@ -48,14 +54,35 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos])
   
-  return (
-    <>
+
+    return(
+      <>
+      <Router>
       <Header searchBar={false} />
-      <Addtodo addTodo={addTodo}/>
+      <Switch>
+        
+      <Route exact path="/" render={()=>{
+        return(
+          <>
+          <Addtodo addTodo={addTodo}/>
       <Todos todos={todos} ondelete={ondelete} />
-      <Footerr />
+      </>
+        );
+
+      }}>
+          </Route>
+          <Route exact path="/about" render={()=>{
+            return(<> <About /></>)
+          }}>
+          </Route>
+          
+        </Switch>
+      
+
+      <Footerr /> 
+      </Router>     
     </>
-  );
+    );
 }
 
 export default App;
