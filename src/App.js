@@ -2,11 +2,18 @@ import React from "react";
 import Header from "./components/header";
 import Footerr from "./components/footer";
 import Todos from "./components/todos";
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import Addtodo from "./components/addtodo"
 import './css/App.css'
 
 function App() {
+  let initTodo;
+  if (localStorage.getItem("todos") === null) {
+    initTodo = [];
+  }
+  else {
+    initTodo = JSON.parse(localStorage.getItem("todos"));
+  }
   const ondelete = (todo) => {
     console.log("iamvanishing", todo);
     setTodos(
@@ -14,33 +21,33 @@ function App() {
         return e !== todo;
       })
     );
+    localStorage.setItem("todos", JSON.stringify(todos));
   };
   const addTodo=(title,desc)=>{
-    let sno=todos[todos.length-1].sno+1;
-    const myTodo={
-      sno:sno,
-      title:title,
-      desc:desc,
+    if (todos.length === 0){
+      const myTodo={
+        sno:1,
+        title:title,
+        desc:desc,
+      }
+      setTodos([...todos,myTodo]);
+      console.log(myTodo);
+    }else{
+      let sno=todos[todos.length-1].sno+1;
+      const myTodo={
+        sno:sno,
+        title:title,
+        desc:desc,
+      }
+      setTodos([...todos,myTodo]);
+      console.log("hdfi",myTodo)
     }
-    setTodos([...todos,myTodo]);
   };
-  let [todos, setTodos] = useState([
-    {
-      sno: 1,
-      title: "Go To The Market",
-      desc: "YOU HAVE TO GET THIS JOB DONE",
-    },
-    {
-      sno: 2,
-      title: "Go To The mall",
-      desc: "YOU HAVE TO GET THIS JOB DONE",
-    },
-    {
-      sno: 3,
-      title: "Go To The ghat",
-      desc: "YOU HAVE TO GET THIS JOB DONE",
-    },
-  ]);
+  const [todos, setTodos] = useState(initTodo);
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos])
+  
   return (
     <>
       <Header searchBar={false} />

@@ -1,15 +1,17 @@
 import React from 'react';
 import { useState } from "react";
 
-export default function Addtodo(addTodo) {
+export default function Addtodo({addTodo}) {
   const [title,setTitle]=useState("");
   const [desc,setDesc]=useState("");
   const submit=(e)=>{
-    e.preventDefault();
+    e.preventDefault(e)
     if (!title || !desc){
       alert("title or description cannot be empty");
+    }else{
+      addTodo(title,desc);
     }
-    addTodo(title,desc);
+   
   }
   return (
   <div className="container my-3" style={{marginTop: '25px',}}>
@@ -52,7 +54,7 @@ export default function Addtodo(addTodo) {
             Check me out
           </label>
         </div>
-        <button type="submit" className="btn btn-sm btn-success btn-primary">
+        <button type="submit"  className="btn btn-sm btn-success btn-primary">
           Submit
         </button>
       </form>
