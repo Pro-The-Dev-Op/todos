@@ -19,4 +19,4 @@ ToDo list is a simple web application to save Your daily tasks in order not to m
 * CSS
 
 ### App demo
-https://github.com/Pro-The-Dev-Op/todos
+https://todos-list-op.herokuapp.com/
