@@ -13,6 +13,7 @@ export default function Todo({ todo, ondelete }) {
       >
         Delete Me
       </button>
+      <hr noshade size="4" align="center"/>
     </div>
   );
 }
